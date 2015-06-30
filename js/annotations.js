@@ -416,7 +416,8 @@ function renderButtons(chart) {
 
 function renderButton(chart, button, i) {
 	var userOffset = chart.annotations.options.buttonsOffsets,
-		xOffset = chart.rangeSelector ? chart.rangeSelector.inputGroup.offset : 0,
+		offsetParent = chart.rangeSelector && chart.rangeSelector.inputGroup,
+		xOffset = offsetParent ? offsetParent.offset : 0,
 		renderer = chart.renderer,
 		symbol = button.symbol,
 		offset = 30,
@@ -978,8 +979,9 @@ extend(Chart.prototype, {
 										annotation.redraw();
 								});
 								each(chart.annotations.buttons, function(button, i) {
-										var	xOffset = chart.rangeSelector ? chart.rangeSelector.inputGroup.offset : 0,
-												x = chart.plotWidth + chart.plotLeft - ((i+1) * 30) - xOffset - userOffset[0];
+										var offsetParent = chart.rangeSelector && chart.rangeSelector.inputGroup,
+											xOffset = offsetParent? offsetParent.offset : 0,
+											x = chart.plotWidth + chart.plotLeft - ((i+1) * 30) - xOffset - userOffset[0];
 										button[0].attr({
 												x: x
 										});
